@@ -54,6 +54,17 @@ def main():
     df = load_data()
     x_train, x_test, y_train, y_test = split(df)
     class_names = ['edible', 'poisonous']
+    st.sidebar.subheader("Choose Classifier")
+    classifier = st.sidebar.selectbox(
+        "Classifier", ("Support Vector Machine (SVM)", "Logistic Regression", "Random Forest"))
+
+    if classifier == 'Support Vector Machine (SVM)':
+        st.sidebar.subheader("Model Hyperparameteres")
+        c = st.sidebar.number_input(
+            "C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C')
+        kernel = st.sidebar.radio("Kernel", ("rbf", "linear"), key='kernel')
+        gamma = st.sidebar.radio(
+            "Gamma (Kernel Coefficient)", ("scale", "auto"), key='gamma')
 
     if st.sidebar.checkbox("Show raw data", False):
         st.subheader("Mushroom Dataset (Classification)")
