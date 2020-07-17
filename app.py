@@ -82,7 +82,7 @@ def main():
                 y_test, y_pred, labels=class_names).round(2))
             plot_metrics(metrics)
 
-        if classifier == 'Logistic Regression':
+    if classifier == 'Logistic Regression':
         st.sidebar.subheader("Model Hyperparameteres")
         C = st.sidebar.number_input(
             "C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C')
