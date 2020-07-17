@@ -60,7 +60,7 @@ def main():
 
     if classifier == 'Support Vector Machine (SVM)':
         st.sidebar.subheader("Model Hyperparameteres")
-        c = st.sidebar.number_input(
+        C = st.sidebar.number_input(
             "C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C')
         kernel = st.sidebar.radio("Kernel", ("rbf", "linear"), key='kernel')
         gamma = st.sidebar.radio(
