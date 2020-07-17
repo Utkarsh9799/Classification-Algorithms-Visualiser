@@ -66,6 +66,22 @@ def main():
         gamma = st.sidebar.radio(
             "Gamma (Kernel Coefficient)", ("scale", "auto"), key='gamma')
 
+        metrics = st.sidebar.multiselect(
+            "Metrics to plot", ('Confusion Matrix', 'ROC Curve', 'Precision-Recall Curve'))
+
+        if st.sidebar.button("Classify", key='classify'):
+            st.subheader("Support Vector Machine (SVM) Results")
+            model = SVC(C=C, kernel=kernel, gamma=gamma)
+            model.fit(x_train, y_train)
+            accuracy = model.score(x_test, y_test)
+            y_pred = model.predict(x_test)
+            st.write("Accuracy: ", accuracy.round(2))
+            st.write("Precision: ", precision_score(
+                y_test, y_pred, labels=class_names).round(2))
+            st.write("Recall: ", recall_score(
+                y_test, y_pred, labels=class_names).round(2))
+            plot_metrics(metrics)
+
     if st.sidebar.checkbox("Show raw data", False):
         st.subheader("Mushroom Dataset (Classification)")
         st.write(df)
